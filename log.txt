@@ -1,0 +1,177 @@
++ sudo docker run -it -v /nix:/nix -v /tmp/azure-cli:/tmp/azure-cli -e AZURE_CONFIG_DIR=/tmp/azure-cli -e AZURE_STORAGE_CONNECTION_STRING= microsoft/azure-cli:latest az image show -n nixos-image-16.09.1694.019dcc3-x86_64-linux.vhd -g nixos --q '[id]' -o tsv --subscription aff271ee-e9be-4441-b9bb-42f5af4cbaeb
++ sudo docker run -it -v /nix:/nix -v /tmp/azure-cli:/tmp/azure-cli -e AZURE_CONFIG_DIR=/tmp/azure-cli -e AZURE_STORAGE_CONNECTION_STRING= microsoft/azure-cli:latest az group create -l westus2 -n nixos-user-westus2 --subscription aff271ee-e9be-4441-b9bb-42f5af4cbaeb
+{
+  "id": "/subscriptions/aff271ee-e9be-4441-b9bb-42f5af4cbaeb/resourceGroups/nixos-user-westus2",
+  "location": "westus2",
+  "managedBy": null,
+  "name": "nixos-user-westus2",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null
+}
++ sudo docker run -it -v /nix:/nix -v /tmp/azure-cli:/tmp/azure-cli -e AZURE_CONFIG_DIR=/tmp/azure-cli -e AZURE_STORAGE_CONNECTION_STRING= microsoft/azure-cli:latest az vm create --debug --name nixos-test-26081 -g nixos-user-westus2 --image $'/subscriptions/aff271ee-e9be-4441-b9bb-42f5af4cbaeb/resourceGroups/nixos/providers/Microsoft.Compute/images/nixos-image-16.09.1694.019dcc3-x86_64-linux.vhd\r' --os-disk-size-gb 50 --admin-username azureuser --ssh-key-value 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC9YAN+P0umXeSP/Cgd5ZvoD5gpmkdcrOjmHdonvBbptbMUbI/Zm0WahBDK0jO5vfJ/C6A1ci4quMGCRh98LRoFKFRoWdwlGFcFYcLkuG/AbE8ObNLHUxAwqrdNfIV6z0+zYi3XwVjxrEqyJ/auZRZ4JDDBha2y6Wpru8v9yg41ogeKDPgHwKOf/CKX77gCVnvkXiG5ltcEZAamEitSS8Mv8Rg/JfsUUwULb6yYGh+H6RECKriUAl9M+V11SOfv8MAdkXlYRrcqqwuDAheKxNGHEoGLBk+Fm+orRChckW1QcP89x6ioxpjN9VbJV0JARF+GgHObvvV+dGHZZL1N3jr8WtpHeJWxHPdBgTupDIA5HeL0OCoxgSyyfJncMl8odCyUqE+lqXVz+oURGeRxnIbgJ07dNnX6rFWRgQKrmdV4lt1i1F5Uux9IooYs/42sKKMUQZuBLTN4UzipPQM/DyDO01F0pdcaPEcIO+tp2U6gVytjHhZqEeqAMaUbq7a6ucAuYzczGZvkApc85nIo9jjW+4cfKZqV8BQfJM1YnflhAAplIq6b4Tzayvw1DLXd2c5rae+GlVCsVgpmOFyT6bftSon/HfxwBE4wKFYF7fo7/j6UbAeXwLafDhX+S5zSNR6so1epYlwcMLshXqyJePJNhtsRhpGLd9M3UqyGDAFoOQ== cardno:000607532298' --size Standard_D32s_v3 --location westus2 --subscription aff271ee-e9be-4441-b9bb-42f5af4cbaeb
+[36mCommand arguments: ['vm', 'create', '--debug', '--name', 'nixos-test-26081', '-g', 'nixos-user-westus2', '--image', '/subscriptions/aff271ee-e9be-4441-b9bb-42f5af4cbaeb/resourceGroups/nixos/providers/Microsoft.Compute/images/nixos-image-16.09.1694.019dcc3-x86_64-linux.vhd\r', '--os-disk-size-gb', '50', '--admin-username', 'azureuser', '--ssh-key-value', 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC9YAN+P0umXeSP/Cgd5ZvoD5gpmkdcrOjmHdonvBbptbMUbI/Zm0WahBDK0jO5vfJ/C6A1ci4quMGCRh98LRoFKFRoWdwlGFcFYcLkuG/AbE8ObNLHUxAwqrdNfIV6z0+zYi3XwVjxrEqyJ/auZRZ4JDDBha2y6Wpru8v9yg41ogeKDPgHwKOf/CKX77gCVnvkXiG5ltcEZAamEitSS8Mv8Rg/JfsUUwULb6yYGh+H6RECKriUAl9M+V11SOfv8MAdkXlYRrcqqwuDAheKxNGHEoGLBk+Fm+orRChckW1QcP89x6ioxpjN9VbJV0JARF+GgHObvvV+dGHZZL1N3jr8WtpHeJWxHPdBgTupDIA5HeL0OCoxgSyyfJncMl8odCyUqE+lqXVz+oURGeRxnIbgJ07dNnX6rFWRgQKrmdV4lt1i1F5Uux9IooYs/42sKKMUQZuBLTN4UzipPQM/DyDO01F0pdcaPEcIO+tp2U6gVytjHhZqEeqAMaUbq7a6ucAuYzczGZvkApc85nIo9jjW+4cfKZqV8BQfJM1YnflhAAplIq6b4Tzayvw1DLXd2c5rae+GlVCsVgpmOFyT6bftSon/HfxwBE4wKFYF7fo7/j6UbAeXwLafDhX+S5zSNR6so1epYlwcMLshXqyJePJNhtsRhpGLd9M3UqyGDAFoOQ== cardno:000607532298', '--size', 'Standard_D32s_v3', '--location', 'westus2', '--subscription', 'aff271ee-e9be-4441-b9bb-42f5af4cbaeb'][0m
+[36mEvent: Cli.PreExecute [][0m
+[36mEvent: CommandParser.OnGlobalArgumentsCreate [<function CLILogging.on_global_arguments at 0x7fce2f5742f0>, <function OutputProducer.on_global_arguments at 0x7fce2f31e950>, <function CLIQuery.on_global_arguments at 0x7fce2f336488>][0m
+[36mEvent: CommandInvoker.OnPreCommandTableCreate [][0m
+[36mInstalled command modules ['acr', 'acs', 'advisor', 'ams', 'appservice', 'backup', 'batch', 'batchai', 'billing', 'botservice', 'cdn', 'cloud', 'cognitiveservices', 'configure', 'consumption', 'container', 'cosmosdb', 'dla', 'dls', 'dms', 'eventgrid', 'eventhubs', 'extension', 'feedback', 'find', 'hdinsight', 'interactive', 'iot', 'iotcentral', 'keyvault', 'lab', 'maps', 'monitor', 'network', 'policyinsights', 'profile', 'rdbms', 'redis', 'relay', 'reservations', 'resource', 'role', 'search', 'security', 'servicebus', 'servicefabric', 'signalr', 'sql', 'storage', 'vm'][0m
+[36mLoaded module 'acr' in 0.006 seconds.[0m
+[36mLoaded module 'acs' in 0.004 seconds.[0m
+[36mLoaded module 'advisor' in 0.002 seconds.[0m
+[36mEvent: CommandLoader.OnLoadCommandTable [][0m
+[36mLoaded module 'ams' in 0.008 seconds.[0m
+[36mLoaded module 'appservice' in 0.038 seconds.[0m
+[36mLoaded module 'backup' in 0.006 seconds.[0m
+[36mEvent: CommandLoader.OnLoadCommandTable [][0m
+[36mLoaded module 'batch' in 0.019 seconds.[0m
+[36mLoaded module 'batchai' in 0.006 seconds.[0m
+[36mLoaded module 'billing' in 0.003 seconds.[0m
+[36mLoaded module 'botservice' in 0.006 seconds.[0m
+[36mEvent: CommandLoader.OnLoadCommandTable [][0m
+[36mLoaded module 'cdn' in 0.005 seconds.[0m
+[36mLoaded module 'cloud' in 0.003 seconds.[0m
+[36mLoaded module 'cognitiveservices' in 0.003 seconds.[0m
+[36mLoaded module 'configure' in 0.001 seconds.[0m
+[36mLoaded module 'consumption' in 0.004 seconds.[0m
+[36mLoaded module 'container' in 0.004 seconds.[0m
+[36mLoaded module 'cosmosdb' in 0.006 seconds.[0m
+[36mLoaded module 'dla' in 0.008 seconds.[0m
+[36mLoaded module 'dls' in 0.006 seconds.[0m
+[36mLoaded module 'dms' in 0.004 seconds.[0m
+[36mLoaded module 'eventgrid' in 0.003 seconds.[0m
+[36mLoaded module 'eventhubs' in 0.005 seconds.[0m
+[36mLoaded module 'extension' in 0.001 seconds.[0m
+[36mLoaded module 'feedback' in 0.001 seconds.[0m
+[36mLoaded module 'find' in 0.001 seconds.[0m
+[36mLoaded module 'hdinsight' in 0.004 seconds.[0m
+[36mLoaded module 'interactive' in 0.001 seconds.[0m
+[36mLoaded module 'iot' in 0.006 seconds.[0m
+[36mLoaded module 'iotcentral' in 0.002 seconds.[0m
+[36mLoaded module 'keyvault' in 0.009 seconds.[0m
+[36mLoaded module 'lab' in 0.005 seconds.[0m
+[36mLoaded module 'maps' in 0.002 seconds.[0m
+[36mLoaded module 'monitor' in 0.008 seconds.[0m
+[36mLoaded module 'network' in 0.046 seconds.[0m
+[36mLoaded module 'policyinsights' in 0.002 seconds.[0m
+[36mLoaded module 'profile' in 0.002 seconds.[0m
+[36mLoaded module 'rdbms' in 0.010 seconds.[0m
+[36mLoaded module 'redis' in 0.003 seconds.[0m
+[36mLoaded module 'relay' in 0.007 seconds.[0m
+[36mLoaded module 'reservations' in 0.004 seconds.[0m
+[36mLoaded module 'resource' in 0.015 seconds.[0m
+[36mLoaded module 'role' in 0.007 seconds.[0m
+[36mLoaded module 'search' in 0.002 seconds.[0m
+[36mLoaded module 'security' in 0.004 seconds.[0m
+[36mLoaded module 'servicebus' in 0.007 seconds.[0m
+[36mLoaded module 'servicefabric' in 0.003 seconds.[0m
+[36mLoaded module 'signalr' in 0.002 seconds.[0m
+[36mLoaded module 'sql' in 0.011 seconds.[0m
+[36mEvent: CommandLoader.OnLoadCommandTable [][0m
+[36mLoaded module 'storage' in 0.053 seconds.[0m
+[36mLoaded module 'vm' in 0.022 seconds.[0m
+[36mLoaded all modules in 0.387 seconds. (note: there's always an overhead with the first module loaded)[0m
+[36mExtensions directory: '/tmp/azure-cli/cliextensions'[0m
+[36mEvent: CommandInvoker.OnPreCommandTableTruncate [][0m
+[36mEvent: CommandInvoker.OnPostCommandTableCreate [<function register_global_subscription_argument.<locals>.add_subscription_parameter at 0x7fce2f050510>, <function register_ids_argument.<locals>.add_ids_arguments at 0x7fce2f078ea0>][0m
+[36mEvent: CommandInvoker.OnCommandTableLoaded [][0m
+[36mEvent: CommandInvoker.OnPreParseArgs [<function _documentdb_deprecate at 0x7fce2cba4378>][0m
+[36mEvent: CommandInvoker.OnPostParseArgs [<function OutputProducer.handle_output_argument at 0x7fce2f31e9d8>, <function CLIQuery.handle_query_parameter at 0x7fce2f336510>, <function register_ids_argument.<locals>.parse_ids_arguments at 0x7fce2f078f28>, <function handler at 0x7fce2cb06d08>][0m
+[36mstorage profile 'StorageProfile.ManagedCustomImage'[0m
+[36mGetting management service client client_type=ComputeManagementClient[0m
+[36mmsrest.universal_http.requests : Configuring retry: max_retries=4, backoff_factor=0.8, max_backoff=90[0m
+[36mattempting to read file /tmp/azure-cli/accessTokens.json as utf-8-sig[0m
+[36madal-python : 27d66d3c-cbf1-42ab-9416-7ff1d96528cc - Authority:Performing instance discovery: ...[0m
+[36madal-python : 27d66d3c-cbf1-42ab-9416-7ff1d96528cc - Authority:Performing static instance discovery[0m
+[36madal-python : 27d66d3c-cbf1-42ab-9416-7ff1d96528cc - Authority:Authority validated via static instance discovery[0m
+[32madal-python : 27d66d3c-cbf1-42ab-9416-7ff1d96528cc - TokenRequest:Getting token from cache with refresh if necessary.[0m
+[36madal-python : 27d66d3c-cbf1-42ab-9416-7ff1d96528cc - CacheDriver:finding with query keys: {'_clientId': '...', 'userId': '...'}[0m
+[36madal-python : 27d66d3c-cbf1-42ab-9416-7ff1d96528cc - CacheDriver:Looking for potential cache entries: {'_clientId': '...', 'userId': '...'}[0m
+[36madal-python : 27d66d3c-cbf1-42ab-9416-7ff1d96528cc - CacheDriver:Found 2 potential entries.[0m
+[36madal-python : 27d66d3c-cbf1-42ab-9416-7ff1d96528cc - CacheDriver:Resource specific token found.[0m
+[36madal-python : 27d66d3c-cbf1-42ab-9416-7ff1d96528cc - CacheDriver:Returning token from cache lookup, AccessTokenId: b'JYPfooTOIsCrMbLuKE7Z04IsEsjGBSj/TUqvWrIAO0Y=', RefreshTokenId: b'Xl1SARVbyi4GPEHyx0v83KBUW41ceKoFyXez0GTBDE4='[0m
+[36mmsrest.http_logger : Request URL: 'https://management.azure.com/subscriptions/aff271ee-e9be-4441-b9bb-42f5af4cbaeb/resourceGroups/nixos/providers/Microsoft.Compute/images/nixos-image-16.09.1694.019dcc3-x86_64-linux.vhd%0D?api-version=2018-10-01'[0m
+[36mmsrest.http_logger : Request method: 'GET'[0m
+[36mmsrest.http_logger : Request headers:[0m
+[36mmsrest.http_logger :     'Accept': 'application/json'[0m
+[36mmsrest.http_logger :     'accept-language': 'en-US'[0m
+[36mmsrest.http_logger :     'User-Agent': 'python/3.6.4 (Linux-4.20.3-x86_64-with) msrest/0.6.4 msrest_azure/0.6.0 computemanagementclient/4.4.0 Azure-SDK-For-Python AZURECLI/2.0.55'[0m
+[36mmsrest.http_logger : Request body:[0m
+[36mmsrest.http_logger : None[0m
+[36mmsrest.universal_http : Configuring redirects: allow=True, max=30[0m
+[36mmsrest.universal_http : Configuring request: timeout=100, verify=True, cert=None[0m
+[36mmsrest.universal_http : Configuring proxies: ''[0m
+[36mmsrest.universal_http : Evaluate proxies against ENV settings: True[0m
+[36murllib3.connectionpool : Starting new HTTPS connection (1): management.azure.com:443[0m
+[36murllib3.connectionpool : https://management.azure.com:443 "GET /subscriptions/aff271ee-e9be-4441-b9bb-42f5af4cbaeb/resourceGroups/nixos/providers/Microsoft.Compute/images/nixos-image-16.09.1694.019dcc3-x86_64-linux.vhd%0D?api-version=2018-10-01 HTTP/1.1" 400 324[0m
+[36mmsrest.http_logger : Response status: 400[0m
+[36mmsrest.http_logger : Response headers:[0m
+[36mmsrest.http_logger :     'Content-Type': 'text/html; charset=us-ascii'[0m
+[36mmsrest.http_logger :     'Server': 'Microsoft-HTTPAPI/2.0'[0m
+[36mmsrest.http_logger :     'Date': 'Mon, 28 Jan 2019 07:07:36 GMT'[0m
+[36mmsrest.http_logger :     'Connection': 'close'[0m
+[36mmsrest.http_logger :     'Content-Length': '324'[0m
+[36mmsrest.http_logger : Response content:[0m
+[36mmsrest.http_logger : <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd">
+<HTML><HEAD><TITLE>Bad Request</TITLE>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=us-ascii"></HEAD>
+<BODY><h2>Bad Request - Invalid URL</h2>
+<hr><p>HTTP Error 400. The request URL is invalid.</p>
+</BODY></HTML>
+[0m
+[36mmsrest.exceptions : Cannot deserialize content-type: text/html[0m
+[36mmsrest.exceptions : Operation failed with status: 'Bad Request'. Details: 400 Client Error: Bad Request for url: https://management.azure.com/subscriptions/aff271ee-e9be-4441-b9bb-42f5af4cbaeb/resourceGroups/nixos/providers/Microsoft.Compute/images/nixos-image-16.09.1694.019dcc3-x86_64-linux.vhd%0D?api-version=2018-10-01[0m
+usage: az vm create [-h] [--verbose] [--debug]
+                    [--output {json,jsonc,table,tsv,yaml,none}]
+                    [--query JMESPATH] --name NAME --resource-group
+                    RESOURCE_GROUP_NAME [--image IMAGE] [--size SIZE]
+                    [--location LOCATION] [--tags [TAGS [TAGS ...]]]
+                    [--authentication-type {ssh,password,all}]
+                    [--admin-password ADMIN_PASSWORD]
+                    [--admin-username ADMIN_USERNAME]
+                    [--ssh-dest-key-path SSH_DEST_KEY_PATH]
+                    [--ssh-key-value SSH_KEY_VALUE] [--generate-ssh-keys]
+                    [--availability-set AVAILABILITY_SET]
+                    [--nics NICS [NICS ...]] [--nsg NSG]
+                    [--nsg-rule {RDP,SSH}]
+                    [--accelerated-networking [{true,false}]]
+                    [--private-ip-address PRIVATE_IP_ADDRESS]
+                    [--public-ip-address PUBLIC_IP_ADDRESS]
+                    [--public-ip-address-allocation {dynamic,static}]
+                    [--public-ip-address-dns-name PUBLIC_IP_ADDRESS_DNS_NAME]
+                    [--public-ip-sku {Basic,Standard}]
+                    [--os-disk-name OS_DISK_NAME] [--os-type {windows,linux}]
+                    [--storage-account STORAGE_ACCOUNT]
+                    [--storage-caching {None,ReadOnly,ReadWrite}]
+                    [--data-disk-caching DATA_CACHING [DATA_CACHING ...]]
+                    [--storage-container-name STORAGE_CONTAINER_NAME]
+                    [--storage-sku STORAGE_SKU [STORAGE_SKU ...]]
+                    [--use-unmanaged-disk] [--attach-os-disk ATTACH_OS_DISK]
+                    [--os-disk-size-gb OS_DISK_SIZE_GB]
+                    [--attach-data-disks ATTACH_DATA_DISKS [ATTACH_DATA_DISKS ...]]
+                    [--data-disk-sizes-gb DATA_DISK_SIZES_GB [DATA_DISK_SIZES_GB ...]]
+                    [--vnet-name VNET_NAME]
+                    [--vnet-address-prefix VNET_ADDRESS_PREFIX]
+                    [--subnet SUBNET]
+                    [--subnet-address-prefix SUBNET_ADDRESS_PREFIX]
+                    [--validate] [--custom-data CUSTOM_DATA]
+                    [--secrets SECRETS [SECRETS ...]] [--plan-name PLAN_NAME]
+                    [--plan-product PLAN_PRODUCT]
+                    [--plan-publisher PLAN_PUBLISHER]
+                    [--plan-promotion-code PLAN_PROMOTION_CODE]
+                    [--license-type {Windows_Server,Windows_Client,None}]
+                    [--assign-identity [ASSIGN_IDENTITY [ASSIGN_IDENTITY ...]]]
+                    [--scope IDENTITY_SCOPE] [--role IDENTITY_ROLE]
+                    [--asgs APPLICATION_SECURITY_GROUPS [APPLICATION_SECURITY_GROUPS ...]]
+                    [--zone {1,2,3}]
+                    [--boot-diagnostics-storage BOOT_DIAGNOSTICS_STORAGE]
+                    [--ultra-ssd-enabled [{true,false}]]
+                    [--ephemeral-os-disk [{true,false}]] [--no-wait]
+                    [--subscription _SUBSCRIPTION]
+az vm create: error: 400 Client Error: Bad Request for url: https://management.azure.com/subscriptions/aff271ee-e9be-4441-b9bb-42f5af4cbaeb/resourceGroups/nixos/providers/Microsoft.Compute/images/nixos-image-16.09.1694.019dcc3-x86_64-linux.vhd%0D?api-version=2018-10-01
+[32mtelemetry.save : Save telemetry record of length 2579 in cache[0m
+[32mtelemetry.check : Positive: The /tmp/azure-cli/telemetry.txt does not exist.[0m
+[32mtelemetry.main : Begin creating telemetry upload process.[0m
+[32mtelemetry.process : Creating upload process: "/usr/local/bin/python /usr/local/lib/python3.6/site-packages/azure/cli/telemetry/__init__.py /tmp/azure-cli"[0m
+[32mtelemetry.process : Return from creating porcess[0m
+[32mtelemetry.main : Finish creating telemetry upload process.[0m
